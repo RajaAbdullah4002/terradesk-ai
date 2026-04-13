@@ -22,8 +22,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Initialize database on first run
+# Initialize database and seed on first run
 init_db()
+
+from database import get_all_tickets
+if not get_all_tickets(limit=1):
+    from seed_data import seed_knowledge_base, seed_sample_tickets
+    seed_knowledge_base()
+    seed_sample_tickets()
 
 
 # ── Custom CSS ───────────────────────────────────────────────
